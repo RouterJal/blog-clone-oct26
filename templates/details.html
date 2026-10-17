@@ -4,6 +4,10 @@
     <h1>{{ post.title }}</h1>
     <p>By {{ post.author.username }}</p>
     <p>{{ post.content }}</p>
-    <a href="{% url 'post-update' post.pk %}">Editar</a>
-    <a href="{% url 'post-delete' post.pk %}">Eliminar</a>
+    {% if user.is_authenticated and user == post.author %}
+        <div class="post-actions">
+            <a href="{% url 'post-update' post.pk %}">Editar</a>
+            <a href="{% url 'post-delete' post.pk %}">Eliminar</a>
+        </div>
+    {% endif %}
 {% endblock %}
